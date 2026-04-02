@@ -1,0 +1,143 @@
+hostname D2
+banner motd # D2, STP Topology Change and RSTP Lab #
+spanning-tree mode pvst
+line con 0
+exec-timeout 0 0
+logging synchronous
+exit
+interface range g0/0-3, g1/0-3, g2/0-1
+shutdown
+exit
+interface range g2/0, g1/0-1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+no shutdown
+exit
+vlan 2
+name SecondVLAN
+exit
+interface vlan 1
+ip address 10.0.0.2 255.0.0.0
+no shut
+exit
+
+
+Lab - Observe STP Topology Changes and Implement RSTP
+D2# show spanning-tree root
+Root Hello Max Fwd
+Vlan Root ID Cost Time Age Dly Root Port
+---------------- -------------------- --------- ----- --- --- ------------
+VLAN0001 32769 5000.0001.0000 4 2 20 15 Gi2/0
+VLAN0002 32770 5000.0001.0000 4 2 20 15 Gi2/0
+
+
+D2# show version | include MAC
+Base Ethernet MAC Address : d8:b1:90:5d:c3:00
+D2#
+
+D2# show interfaces ethernet 0/0 | include address
+Hardware is AmdP2, address is 5000.0002.0000
+
+Lab - Observe STP Topology Changes and Implement RSTP
+Amongst the three switches being used to document this lab, D1 has the lowest base MAC address. The
+OUI portion of each MAC address is the same. The first set of hexadecimal characters are different; 0x28
+is a lower number than 0x5d. This is what has caused D1 to be elected as the root bridge.Close configuration window
+Step 2: Find the Root Port for each switch.
+Each switch will have one single root port. This port represents the lowest path cost to the root bridge. Path
+Cost is the total of the Port Costs in the path to the root bridge. The Port Cost is based upon the bandwidth
+value of the port, and it can either be dynamically assigned or statically configured.
+a. As we saw in the previous output of show spanning-tree root on each switch, the Path Cost can be
+different amongst switches. In this case, the path cost from A1 to D1 is 19, reflecting connectivity via our
+pseudo FastEthernet port, while the path cost from D2 to D1 is 4, reflecting connectivity via a
+GigabitEthernet port.
+Open configuration window
+D1# show spanning-tree root
+Root Hello Max Fwd
+Vlan Root ID Cost Time Age Dly Root Port
+---------------- -------------------- --------- ----- --- --- ------------
+VLAN0001 32769 5000.0001.0000 0 2 20 15
+VLAN0002 32770 5000.0001.0000 0 2 20 15
+D2# show spanning-tree root
+Root Hello Max Fwd
+Vlan Root ID Cost Time Age Dly Root Port
+---------------- -------------------- --------- ----- --- --- ------------
+VLAN0001 32769 5000.0001.0000 4 2 20 15 Gi2/0
+VLAN0002 32770 5000.0001.0000 4 2 20 15 Gi2/0
+
+2# show spanning-tree
+VLAN0001
+Spanning tree enabled protocol ieee
+Root ID Priority 32769
+Address 5000.0001.0000
+Cost 23
+Port 5 (GigabitEthernet1/0)
+Hello Time 2 sec Max Age 20 sec Forward Delay 15 sec
+Bridge ID Priority 32769 (priority 32768 sys-id-ext 1)
+Address 5000.0002.0000
+Hello Time 2 sec Max Age 20 sec Forward Delay 15 sec
+Aging Time 15 sec
+Interface Role Sts Cost Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Gi1/0 Root FWD 4 128.5 P2p
+Gi1/1 Altn BLK 4 128.6 P2p
+
+
+D2# show spanning-tree
+VLAN0001
+Spanning tree enabled protocol ieee
+Root ID Priority 32769
+Address 5000.0001.0000
+Cost 4
+Port 1 (GigabitEthernet2/0)
+Hello Time 2 sec Max Age 20 sec Forward Delay 15 sec
+Bridge ID Priority 32769 (priority 32768 sys-id-ext 1)
+Address 5000.0002.0000
+Hello Time 2 sec Max Age 20 sec Forward Delay 15 sec
+Aging Time 300 sec
+Interface Role Sts Cost Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Gi2/0 Root FWD 4 128.1 P2p
+Gi1/0 Desg FWD 19 128.5 P2p
+Gi1/1 Desg FWD 19 128.6 P2p
+D2# debug spanning-tree events
+D2# config t
+D2(config)# interface g2/0
+D2(config-if)# shutdown
+D2(config-if)#
+*Dec 24 13:07:10.790: %LINK-5-CHANGED: Interface GigabitEthernet2/0, changed state to
+administratively down
+*Dec 24 13:07:11.790: %LINEPROTO-5-UPDOWN: Line protocol on Interface
+GigabitEthernet2/0, changed state to down
+D2(config-if)#
+*Dec 24 13:07:28.159: STP: VLAN0001 heard root 32769-5000.0001.0000 on Gi1/0
+*Dec 24 13:07:28.160: supersedes 32769-5000.0004.0000
+*Dec 24 13:07:28.161: STP: VLAN0001 new root is 32769, 5000.0001.0000 on port Gi1/0,
+cost 38
+*Dec 24 13:07:28.162: STP: VLAN0001 sent Topology Change Notice on Gi1/0
+*Dec 24 13:07:28.165: STP[1]: Generating TC trap for port GigabitEthernet1/1
+*Dec 24 13:07:28.166: STP: VLAN0001 Gi1/1 -> blocking
+*Dec 24 13:07:28.166: STP: VLAN0002 heard root 32770-5000.0001.0000 on Gi1/0
+*Dec 24 13:07:28.167: supersedes 32770-5000.0004.0000
+*Dec 24 13:07:28.167: STP: VLAN0002 new root is 32770, 5000.0001.0000 on port Gi1/0,
+cost 38
+D2(config-if)#
+*Dec 24 13:07:28.169: STP: VLAN0002 sent Topology Change Notice on Gi1/0
+*Dec 24 13:07:28.171: STP[2]: Generating TC trap for port GigabitEthernet1/1
+*Dec 24 13:07:28.171: STP: VLAN0002 Gi1/0/6 -> blocking
+D2(config-if)#
+
+
+D2(config)# spanning-tree mode rapid-pvst
+D2(config)#
+Dec 24 13:31:51.023: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed
+state to down
+Dec 24 13:31:51.081: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed
+
+
+
+
+
+
+
+
+
