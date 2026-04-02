@@ -1,3 +1,4 @@
+! Configuration for D1 (Root Bridge)
 hostname D1
 spanning-tree mode pvst
 banner motd # D1, STP Topology Change and RSTP Lab #
