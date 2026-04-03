@@ -1,0 +1,12 @@
+# Verification
+
+## Ping Tests
+
+- PC-A → Gateway ✅
+- PC-B → Gateway ✅
+- PC-A → PC-B ✅
+
+---
+
+## Result
+All devices can communicate successfully.
