@@ -1,0 +1,13 @@
+📌 Given
+IP Address: 10.101.99.228
+Original Mask: /8
+New Mask: /17
+🔹 Results
+Subnet Bits: 9
+Subnets: 512
+Host Bits: 15
+Hosts per Subnet: 32766
+Network: 10.101.0.0
+First Host: 10.101.0.1
+Last Host: 10.101.127.254
+Broadcast: 10.101.127.255
