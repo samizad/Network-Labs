@@ -1,0 +1,51 @@
+# 📘 IPv4 Subnetting Lab (Packet Tracer)
+
+## 🧠 Overview
+This lab demonstrates how to design and implement IPv4 subnetting using a /24 network.
+
+The network is divided into multiple subnets based on host requirements and future scalability.
+
+---
+
+## 🎯 Objectives
+- Design a subnetting scheme
+- Assign IP addresses to devices
+- Configure router and switches
+- Verify connectivity using ping
+
+---
+
+## 🧩 Requirements
+- LAN-A: ≥ 50 hosts
+- LAN-B: ≥ 40 hosts
+- At least 2 additional subnets
+- Same subnet mask (no VLSM)
+
+---
+
+## 🛠 Solution Summary
+- Base network: 192.168.0.0/24
+- Chosen subnet mask: /26
+- Total subnets: 4
+- Hosts per subnet: 62
+
+---
+
+## 📁 Project Structure
+- docs/ → Design and explanation
+- configs/ → Device configurations
+- assets/ → Topology & Packet Tracer file
+
+---
+
+## ✅ Results
+- Successful communication between all devices
+- All pings passed
+
+---
+
+## 🚀 Skills Demonstrated
+- IPv4 subnetting
+- Network design
+- Cisco CLI configuration
+- Troubleshooting connectivity
