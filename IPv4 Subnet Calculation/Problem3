@@ -1,0 +1,25 @@
+# 🧮 Problem 03 – IPv4 Subnet Calculation
+
+## 📌 Given
+
+* IP Address: 172.22.32.12
+* Original Mask: /16
+* New Mask: /19
+
+## 🔹 Results
+
+* Subnet Bits: 3
+
+* Subnets: 8
+
+* Host Bits: 13
+
+* Hosts per Subnet: 8190
+
+* Network: 172.22.32.0
+
+* First Host: 172.22.32.1
+
+* Last Host: 172.22.63.254
+
+* Broadcast: 172.22.63.255
