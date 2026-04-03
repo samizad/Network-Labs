@@ -1,0 +1,29 @@
+enable
+configure terminal
+
+hostname CustomerRouter
+
+enable secret Class123
+
+line console 0
+password Cisco123
+login
+exit
+
+interface g0/0
+ip address 192.168.0.1 255.255.255.192
+no shutdown
+exit
+
+interface g0/1
+ip address 192.168.0.65 255.255.255.192
+no shutdown
+exit
+
+interface s0/1/0
+ip address 209.165.201.2 255.255.255.252
+no shutdown
+exit
+
+end
+write memory
