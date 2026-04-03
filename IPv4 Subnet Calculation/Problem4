@@ -1,0 +1,25 @@
+# 🧮 Problem 04 – IPv4 Subnet Calculation
+
+## 📌 Given
+
+* IP Address: 192.168.1.245
+* Original Mask: /24
+* New Mask: /30
+
+## 🔹 Results
+
+* Subnet Bits: 6
+
+* Subnets: 64
+
+* Host Bits: 2
+
+* Hosts per Subnet: 2
+
+* Network: 192.168.1.244
+
+* First Host: 192.168.1.245
+
+* Last Host: 192.168.1.246
+
+* Broadcast: 192.168.1.247
