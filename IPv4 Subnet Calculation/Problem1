@@ -1,0 +1,22 @@
+📌 Given
+IP Address: 192.168.200.139
+Original Mask: /24
+New Mask: /27 (255.255.255.224)
+🔹 Calculations
+Subnet Bits: 3
+Number of Subnets: 8
+Host Bits: 5
+Hosts per Subnet: 30
+🔹 Subnet Identification
+
+Block size = 32
+
+The IP 192.168.200.139 falls in the subnet:
+
+192.168.200.128 – 192.168.200.159
+
+🔹 Results
+Network Address: 192.168.200.128
+First Host: 192.168.200.129
+Last Host: 192.168.200.158
+Broadcast Address: 192.168.200.159
