@@ -1,0 +1,46 @@
+# Subnetting Design
+
+## Base Network
+192.168.0.0/24
+
+## Requirements
+- 50 hosts (LAN-A)
+- 40 hosts (LAN-B)
+- 2 extra subnets
+
+---
+
+## Step 1: Largest Host Requirement
+50 hosts
+
+---
+
+## Step 2: Required Subnets
+4 subnets
+
+---
+
+## Step 3: Subnet Mask Selection
+
+### /25
+- 2 subnets ❌
+
+### /26 ✅
+- 4 subnets ✔
+- 62 hosts ✔
+
+---
+
+## Final Choice
+/26 → 255.255.255.192
+
+---
+
+## Subnets
+
+| Subnet | Network |
+|--------|--------|
+| 1 | 192.168.0.0 |
+| 2 | 192.168.0.64 |
+| 3 | 192.168.0.128 |
+| 4 | 192.168.0.192 |
