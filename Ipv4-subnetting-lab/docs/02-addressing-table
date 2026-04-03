@@ -1,0 +1,15 @@
+# Addressing Table
+
+## LAN-A
+- Router: 192.168.0.1
+- Switch: 192.168.0.2
+- PC-A: 192.168.0.62
+- Gateway: 192.168.0.1
+
+---
+
+## LAN-B
+- Router: 192.168.0.65
+- Switch: 192.168.0.66
+- PC-B: 192.168.0.126
+- Gateway: 192.168.0.65
