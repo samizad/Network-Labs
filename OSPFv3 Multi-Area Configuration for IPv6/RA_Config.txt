@@ -1,0 +1,17 @@
+! RA Configuration
+ipv6 unicast-routing
+!
+ipv6 router ospf 1
+ router-id 1.1.1.1
+!
+interface GigabitEthernet0/0
+ ipv6 address 2001:DB8:1:A1::1/64
+ ipv6 ospf 1 area 1
+!
+interface GigabitEthernet0/1
+ ipv6 address 2001:DB8:1:A2::1/64
+ ipv6 ospf 1 area 1
+!
+interface Serial0/0/0
+ ipv6 address 2001:DB8:1:AB::2/64
+ ipv6 ospf 1 area 0
