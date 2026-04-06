@@ -33,5 +33,14 @@ This lab demonstrates the implementation of **OSPFv3** in a multi-router topolog
 - **Fix:** Enabled `ipv6 unicast-routing` to allow the router to forward IPv6 packets.
 
 ## Verification
-- `show ipv6 ospf neighbor`: Confirmed **FULL** adjacency with all neighbors.
-- `show ipv6 route ospf`: Confirmed that routes from other areas are present (marked with **OI**).
+show ipv6 ospf neighbor: Confirmed FULL adjacency with all neighbors, ensuring the OSPFv3 neighbor state machine is complete.
+
+show ipv6 route ospf: Confirmed that Inter-Area routes are present in the routing table (marked with OI), proving successful routing updates between Area 0, 1, and 2.
+
+show ipv6 route: Verified the entire IPv6 routing table, confirming the coexistence of Connected (C), Local (L), and OSPF (O) routes.
+
+show ipv6 ospf database: Inspected the Link State Advertisement (LSA) types, confirming the router has a consistent map of the entire multi-area topology.
+
+show ipv6 ospf interface: Verified that OSPFv3 is active on specific interfaces, ensuring correct Area ID assignment and matching Hello/Dead timers.
+
+
