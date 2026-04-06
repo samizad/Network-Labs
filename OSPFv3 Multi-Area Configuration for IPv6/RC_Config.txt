@@ -1,0 +1,13 @@
+! RC Configuration
+ipv6 unicast-routing
+!
+ipv6 router ospf 1
+ router-id 3.3.3.3
+!
+interface GigabitEthernet0/0
+ ipv6 address 2001:DB8:1:C1::1/64
+ ipv6 ospf 1 area 2
+!
+interface Serial0/0/1
+ ipv6 address 2001:DB8:1:BC::2/64
+ ipv6 ospf 1 area 0
