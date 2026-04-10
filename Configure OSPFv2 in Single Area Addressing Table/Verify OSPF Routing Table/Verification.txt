@@ -1,0 +1,4 @@
+"in R1, R2 and R3 use  commands below:"
+show ip route ospf
+show ip ospf neighbor
+show ip ospf interface brief
