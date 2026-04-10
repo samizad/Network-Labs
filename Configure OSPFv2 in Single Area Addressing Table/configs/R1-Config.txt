@@ -1,0 +1,16 @@
+! R1 Configuration
+interface GigabitEthernet0/0
+ ip address 172.16.1.1 255.255.255.0
+!
+interface Serial0/0/0
+ ip address 172.16.3.1 255.255.255.252
+!
+interface Serial0/0/1
+ ip address 192.168.10.5 255.255.255.252
+!
+router ospf 10
+ router-id 1.1.1.1
+ network 172.16.1.1 0.0.0.0 area 0
+ network 172.16.3.1 0.0.0.0 area 0
+ network 192.168.10.5 0.0.0.0 area 0
+ passive-interface GigabitEthernet0/0
