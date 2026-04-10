@@ -1,0 +1,19 @@
+! R3 (D2) Configuration
+!
+interface GigabitEthernet0/1
+ ip address 10.10.0.3 255.255.255.248
+!
+interface GigabitEthernet0/0
+ ip address 10.10.24.1 255.255.255.0
+!
+interface GigabitEthernet1/1
+ ip address 10.10.25.1 255.255.255.0
+!
+router ospf 10
+ router-id 3.3.3.3
+ network 10.10.0.3 0.0.0.0 area 0
+ network 10.10.24.1 0.0.0.0 area 0
+ network 10.10.25.1 0.0.0.0 area 0
+ ! LAN interfaces set to passive individually
+ passive-interface GigabitEthernet0/0
+ passive-interface GigabitEthernet1/1
