@@ -1,0 +1,10 @@
+R1# show ip ssh
+SSH Enabled - version 1.99
+Authentication timeout: 120 secs; Authentication retries: 3
+Minimum expected Diffie Hellman key size : 1024 bits
+IOS Keys in SECSH format(ssh-rsa, ssh-dss):
+ssh-rsa AAAAB3Nza1yc2EAAAADAQABAAAAgQ...
+
+R1# show line vty 0 4
+    Line       User       Host(s)              Idle       Location
+* 0 VTY      admin      idle                 00:00:00   192.168.1.10
