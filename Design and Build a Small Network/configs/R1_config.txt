@@ -1,16 +1,32 @@
-! R1 Configuration
+! --- R1 Configuration ---
 hostname R1
-ip domain-name lab.local
+
+! Security Configuration
 enable secret class
+ip domain-name networking.lab
+crypto key generate rsa (1024)
+
+! Interface G0/0/0 (Main interface)
+interface GigabitEthernet0/0/0
+ no shutdown
 !
+! Sub-interface for VLAN 10 (Sales)
 interface GigabitEthernet0/0/0.10
  encapsulation dot1Q 10
  ip address 192.168.1.1 255.255.255.128
 !
+! Sub-interface for VLAN 20 (HR)
 interface GigabitEthernet0/0/0.20
  encapsulation dot1Q 20
  ip address 192.168.1.129 255.255.255.128
-!
+
+! Remote Access and Console Security
 line con 0
  password cisco
  login
+!
+line vty 0 4
+ transport input ssh
+ login local
+!
+end
