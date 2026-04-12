@@ -1,0 +1,11 @@
+R1# show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+
+Gateway of last resort is not set
+
+      192.168.1.0/24 is variably subnetted, 4 subnets, 2 masks
+C        192.168.1.0/25 is directly connected, GigabitEthernet0/0/0.10
+L        192.168.1.1/32 is directly connected, GigabitEthernet0/0/0.10
+C        192.168.1.128/25 is directly connected, GigabitEthernet0/0/0.20
+L        192.168.1.129/32 is directly connected, GigabitEthernet0/0/0.20
