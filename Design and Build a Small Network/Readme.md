@@ -40,6 +40,7 @@ The following commands were used to verify the network stability:
 3. `show vlan brief` - Confirm VLAN assignments on switch ports.
 4. `show interfaces trunk` - Ensure trunk links are active.
 5. `show running-config` - Verify security and SSH configurations.
+   All verification logs are available in the /verifications directory. 
 
 ## How to Run
 1. Download the `.pkt` file from this repository.
