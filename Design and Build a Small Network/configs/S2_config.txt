@@ -1,0 +1,28 @@
+! --- S2 Configuration ---
+hostname S2
+
+! VLAN Database
+vlan 20
+ name HR
+exit
+
+! Access Port for PC2
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 20
+ no shutdown
+
+! Trunk Port connecting to S1
+interface GigabitEthernet0/2
+ switchport mode trunk
+!
+! Management & Security
+enable secret class
+line con 0
+ password cisco
+ login
+line vty 0 15
+ password cisco
+ login
+!
+end
