@@ -1,0 +1,41 @@
+! --- S1 Configuration ---
+hostname S1
+
+! VLAN Database (Defining VLANs for the whole network)
+vlan 10
+ name Sales
+!
+vlan 20
+ name HR
+exit
+
+! Access Port for PC1 (Sales Department)
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+ no shutdown
+
+! Trunk Port connecting to the Router (R1)
+interface GigabitEthernet0/1
+ description Connection to R1
+ switchport mode trunk
+!
+! Trunk Port connecting to Switch 2 (S2)
+interface GigabitEthernet0/2
+ description Connection to S2
+ switchport mode trunk
+
+! Global Security Configuration
+enable secret class
+service password-encryption
+
+! Console & Remote Access Security
+line con 0
+ password cisco
+ login
+!
+line vty 0 15
+ password cisco
+ login
+!
+end
