@@ -11,6 +11,12 @@ This project demonstrates a scalable network design using **Cisco Packet Tracer*
 - **Security:** - Encrypted enable passwords.
   - Console and VTY line security.
   - SSH access configured for remote management.
+    ### Remote Management (SSH)
+         To ensure secure remote administration, SSH has been configured:
+         - **Domain Name:** lab.local
+         - **Encryption:** RSA 1024-bit keys.
+         - **Access Control:** Restricted to SSH only (`transport input ssh`), disabling insecure Telnet.
+         - **Authentication:** Local-user database with privilege 15 access.
 
 ## Topology
 - **1x Cisco 4321 Router**
