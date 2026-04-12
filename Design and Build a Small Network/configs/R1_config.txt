@@ -1,0 +1,16 @@
+! R1 Configuration
+hostname R1
+ip domain-name lab.local
+enable secret class
+!
+interface GigabitEthernet0/0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.1.1 255.255.255.128
+!
+interface GigabitEthernet0/0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.1.129 255.255.255.128
+!
+line con 0
+ password cisco
+ login
