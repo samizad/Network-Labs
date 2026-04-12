@@ -39,3 +39,8 @@ The following commands were used to verify the network stability:
 1. Download the `.pkt` file from this repository.
 2. Open it using **Cisco Packet Tracer**.
 3. Use the `ping` command from PC1 to PC2 to verify connectivity.
+## Troubleshooting (Lessons Learned)
+During the implementation, several key points were verified to ensure connectivity:
+- **Trunking Issues:** Initially, ping failed because the ports between S1 and S2 were not set to `switchport mode trunk`.
+- **Encapsulation:** Ensuring the `encapsulation dot1Q <vlan-id>` command matched the correct sub-interface was crucial for routing.
+- **Default Gateway:** Verified that PC1 uses `192.168.1.1` and PC2 uses `192.168.1.129` as their respective gateways.
