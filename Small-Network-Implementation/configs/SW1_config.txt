@@ -1,0 +1,40 @@
+!
+! Configuration for Switch SW1
+!
+hostname SW1
+!
+! Security: Encrypt clear-text passwords
+service password-encryption
+enable secret class
+!
+! Disable DNS lookup to prevent CLI delays
+no ip domain-lookup
+!
+! Banner MOTD (Warns unauthorized users)
+banner motd ^C
+WARNING: Authorized access only. Transaction logs are being generated.^C
+!
+! Interface VLAN 1 - Management Interface
+! This allows the switch to be managed remotely from other subnets
+interface Vlan1
+ description Management SVI
+ ip address 10.10.10.2 255.255.255.0
+ no shutdown
+!
+! Default Gateway
+! Critical for the switch to communicate with devices outside 10.10.10.0/24
+ip default-gateway 10.10.10.1
+!
+! Line Console Configuration
+line con 0
+ password cisco
+ login
+ logging synchronous
+!
+! Line VTY Configuration (Remote Access)
+line vty 0 15
+ password cisco
+ login
+!
+end
+write memory
