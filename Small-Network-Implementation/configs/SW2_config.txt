@@ -1,0 +1,40 @@
+!
+! Configuration for Switch SW2
+!
+hostname SW2
+!
+! Security: Encrypting passwords and setting secret
+service password-encryption
+enable secret class
+!
+! Disable DNS lookup
+no ip domain-lookup
+!
+! Banner MOTD
+banner motd ^C
+UNAUTHORIZED ACCESS IS PROHIBITED. All activities are monitored.^C
+!
+! Interface VLAN 1 - Management Interface
+! IP assigned from the 10.10.20.0/24 subnet
+interface Vlan1
+ description Management SVI
+ ip address 10.10.20.2 255.255.255.0
+ no shutdown
+!
+! Default Gateway
+! Points to RTA's G0/1 interface
+ip default-gateway 10.10.20.1
+!
+! Line Console Configuration
+line con 0
+ password cisco
+ login
+ logging synchronous
+!
+! Line VTY Configuration
+line vty 0 15
+ password cisco
+ login
+!
+end
+write memory
