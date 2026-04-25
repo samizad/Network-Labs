@@ -1,0 +1,42 @@
+!
+! Configuration for Router RTA
+!
+hostname RTA
+!
+! Security: Encrypting passwords and setting secret
+service password-encryption
+enable secret class
+!
+! Disable DNS lookup to prevent CLI hang on typos
+no ip domain-lookup
+!
+! Banner MOTD
+banner motd ^C
+UNAUTHORIZED ACCESS IS PROHIBITED. All activities are monitored and recorded.^C
+!
+! Interface GigabitEthernet0/0 - LAN 1
+interface GigabitEthernet0/0
+ description Connection to SW1
+ ip address 10.10.10.1 255.255.255.0
+ no shutdown
+!
+! Interface GigabitEthernet0/1 - LAN 2
+interface GigabitEthernet0/1
+ description Connection to SW2
+ ip address 10.10.20.1 255.255.255.0
+ no shutdown
+!
+! Line Console Configuration
+line con 0
+ password cisco
+ login
+ logging synchronous
+!
+! Line VTY Configuration (for Remote Management)
+line vty 0 4
+ password cisco
+ login
+ transport input telnet ssh
+!
+end
+write memory
