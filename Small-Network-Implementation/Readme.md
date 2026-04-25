@@ -16,7 +16,6 @@ SW2,VLAN 1,10.10.20.2,255.255.255.0,10.10.20.1
 PC-1,NIC,10.10.10.10,255.255.255.0,10.10.10.1
 PC-2,NIC,10.10.20.10,255.255.255.0,10.10.20.1
 
-
 ⚙️ Configuration Snippets
 Router (RTA) Configuration
 Basic interface setup and security:
