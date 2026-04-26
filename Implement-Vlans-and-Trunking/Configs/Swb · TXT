@@ -1,0 +1,61 @@
+! ============================================================
+! SWB Configuration — VLAN and Trunking Lab
+! ENCOR 350-401 Practice
+! ============================================================
+
+! ── Part 1: VLAN Database ───────────────────────────────────
+vlan 10
+ name Admin
+vlan 20
+ name Accounts
+vlan 30
+ name HR
+vlan 40
+ name Voice
+vlan 99
+ name Management
+vlan 100
+ name Native
+
+! ── Part 2: Access Port Assignments ─────────────────────────
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+
+interface FastEthernet0/2
+ switchport mode access
+ switchport access vlan 20
+
+interface FastEthernet0/3
+ switchport mode access
+ switchport access vlan 30
+
+! ── Part 2: Management SVI ──────────────────────────────────
+interface Vlan99
+ ip address 192.168.99.253 255.255.255.0
+ no shutdown
+
+! ── Part 3: Static Trunk to SWA (G0/1) ─────────────────────
+! Both ends must match: mode trunk + nonegotiate + native vlan 100
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport nonegotiate
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,30,40,99
+
+! ── Part 4: Dynamic Trunk to SWC (G0/2) ────────────────────
+! Both ends set to dynamic desirable → trunk forms automatically
+interface GigabitEthernet0/2
+ switchport mode dynamic desirable
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,30,40,99
+
+! ── Optional: Stop log messages breaking CLI input ──────────
+line console 0
+ logging synchronous
+
+! ── Verification ────────────────────────────────────────────
+! show vlan brief
+! show interface trunk
+! show interfaces vlan 99
+! show running-config
