@@ -1,0 +1,49 @@
+! ============================================================
+! SWA Configuration — VLAN and Trunking Lab
+! ENCOR 350-401 Practice
+! ============================================================
+
+! ── Part 1: VLAN Database ───────────────────────────────────
+vlan 10
+ name Admin
+vlan 20
+ name Accounts
+vlan 30
+ name HR
+vlan 40
+ name Voice
+vlan 99
+ name Management
+vlan 100
+ name Native
+
+! ── Part 2: Management SVI ──────────────────────────────────
+interface Vlan99
+ ip address 192.168.99.252 255.255.255.0
+ no shutdown
+
+! ── Part 3: Static Trunk to SWB (G0/1) ─────────────────────
+! switchport mode trunk       → forces trunk, no negotiation
+! switchport nonegotiate      → disables DTP (security best practice)
+! native vlan 100             → avoids VLAN 1 as native (security)
+! allowed vlan                → restricts to only required VLANs
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport nonegotiate
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,30,40,99
+
+! ── Part 4: Dynamic Trunk to SWC (G0/2) ────────────────────
+! switchport mode dynamic desirable → actively negotiates trunk via DTP
+! SWC G0/2 is left at default (dynamic auto) — DTP does the rest
+! NOTE: do NOT use nonegotiate here — DTP must remain active
+interface GigabitEthernet0/2
+ switchport mode dynamic desirable
+ switchport trunk native vlan 100
+ switchport trunk allowed vlan 10,20,30,40,99
+
+! ── Verification ────────────────────────────────────────────
+! show vlan brief
+! show interface trunk
+! show interfaces vlan 99
+! show running-config
