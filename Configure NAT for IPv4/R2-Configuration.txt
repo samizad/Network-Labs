@@ -1,0 +1,31 @@
+! --- R2 NAT Configuration ---
+
+! 1. Define ACL for Internal LANs
+ip access-list standard R2NAT
+ permit 192.168.10.0 0.0.0.255
+ permit 192.168.20.0 0.0.0.255
+ permit 192.168.30.0 0.0.0.255
+exit
+
+! 2. Define NAT Pool (First usable address)
+ip nat pool R2POOL 209.165.202.129 209.165.202.129 netmask 255.255.255.252
+
+! 3. Configure Dynamic NAT with PAT (Overload)
+ip nat inside source list R2NAT pool R2POOL overload
+
+! 4. Configure Static NAT for the Server (Second usable address)
+ip nat inside source static 192.168.20.254 209.165.202.130
+
+! 5. Assign NAT Roles to Interfaces
+interface FastEthernet0/0
+ ip nat inside
+exit
+interface Serial0/0/0
+ ip nat inside
+exit
+interface Serial0/0/1
+ ip nat inside
+exit
+interface Serial0/1/0
+ ip nat outside
+exit
